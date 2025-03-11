@@ -12,6 +12,7 @@ const ForgetPassword: React.FC = () => {
   const nav = useHistory()
 
   const handleToLogin = () => {
+    console.log(text)
     nav.push('/home')
   }
 

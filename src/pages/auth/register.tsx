@@ -14,6 +14,8 @@ const Register: React.FC = () => {
   const history = useHistory()
 
   const handleToLogin = () => {
+    setLoading(false)
+    console.log(text)
     history.push('/home')
   }
 

@@ -19,6 +19,7 @@ const Home: React.FC = () => {
     setLoading (true)
 
     setTimeout(() => {
+      console.log(text)
       history.push('/main');
       setLoading (false);
     }, 3000)
