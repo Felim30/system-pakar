@@ -1,0 +1,7 @@
+{
+  "name": "system-pakar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
