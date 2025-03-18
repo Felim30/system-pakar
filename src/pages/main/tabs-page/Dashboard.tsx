@@ -11,6 +11,10 @@ const Dashboard: React.FC = () => {
     history.push('/main/listpenyakit')
   }
 
+  const handleCekKondisi = () => {
+    history.push('/main/cek-kondisi')
+  }
+
   return (
       <GeneralContainer>
         <div className='h-screen w-screen flex flex-col bg-foreground justify-center items-center gap-6'>
@@ -19,14 +23,18 @@ const Dashboard: React.FC = () => {
                 <p className='text-xl font-bold'>Sistem pakar penyakit Scabies</p>
             </div>
             <p className='text-primary text-2xl text-left font-bold w-4/5'>Lainnya</p>
-            <div className='flex p-4 rounded-xl justify-between shadow-xl border border-transparent items-center w-4/5'>
+            <div 
+                className='flex p-4 rounded-xl justify-between shadow-xl border border-transparent items-center w-4/5'
+                onClick={handleCekKondisi}
+              >
                 <p className='text-xl font-bold'>Cek kondisimu</p>
                 <img src={CekKondisi} width={50} height={50} />
             </div>
             <div 
                 className='flex p-4 justify-between rounded-xl shadow-xl border border-transparent items-center w-4/5'
+                onClick={handleListPenyakit}
             >
-                <p className='text-xl font-bold' onClick={handleListPenyakit}>Cek Pencegahan</p>
+                <p className='text-xl font-bold'>Cek Pencegahan</p>
                 <img src={Pencegahan} width={50} height={50} />
             </div>
         </div> 

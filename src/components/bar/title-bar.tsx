@@ -8,7 +8,8 @@ export const TitleBar : React.FC<{title : string}> = ({title}) => {
 
     const handleDashboard = () => {
         history.push('/main/dashboard')
-      }
+    }
+    
     return (
         <div className='font-bold p-8 w-full text-2xl text-center fixed bg-foreground flex items-center justify-start gap-2'>
             <IonIcon icon={arrowBack} onClick={handleDashboard} className='w-1/5'/>

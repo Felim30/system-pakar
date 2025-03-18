@@ -15,6 +15,7 @@ import Profile from './tabs-page/Profile';
 import { IonReactRouter } from '@ionic/react-router';
 import ListPenyakit from './tabs-page/list-penyakit';
 import Pencegahan from './tabs-page/pencegahan';
+import CekKondisi from './tabs-page/cek-kondisi';
 
 const MainTabs: React.FC = () => {
   return (
@@ -29,6 +30,9 @@ const MainTabs: React.FC = () => {
         </Route>
         <Route path="/main/listpenyakit">
           <ListPenyakit />
+        </Route>
+        <Route path="/main/cek-kondisi">
+          <CekKondisi />
         </Route>
         <Route path="/main/pencegahan">
           <Pencegahan />
