@@ -11,7 +11,7 @@ export const TitleBar : React.FC<{title : string}> = ({title}) => {
     }
     
     return (
-        <div className='font-bold p-8 w-full text-2xl text-center fixed bg-foreground flex items-center justify-start gap-2'>
+        <div className='font-bold p-8 w-full text-2xl text-center fixed bg-white flex items-center justify-start gap-2'>
             <IonIcon icon={arrowBack} onClick={handleDashboard} className='w-1/5'/>
             <p className='text-2xl text-center w-3/5'>{title}</p>
         </div>

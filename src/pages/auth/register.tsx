@@ -21,9 +21,9 @@ const Register: React.FC = () => {
 
   return (
       <GeneralContainer>
-        <div className='h-screen w-screen flex flex-col bg-primary justify-center items-center gap-4'>
+        <div className='h-screen w-screen flex flex-col bg-[#0EB96F] justify-center items-center gap-4'>
          <Logo /> 
-         <p className='text-foreground font-medium text-4xl'>Daftar</p>
+         <p className='text-white font-medium text-4xl'>Daftar</p>
          <Input 
             type='text' 
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}

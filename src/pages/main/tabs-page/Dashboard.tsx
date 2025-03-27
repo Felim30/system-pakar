@@ -17,12 +17,12 @@ const Dashboard: React.FC = () => {
 
   return (
       <GeneralContainer>
-        <div className='h-screen w-screen flex flex-col bg-foreground justify-center items-center gap-6'>
+        <div className='h-screen w-screen flex flex-col bg-white justify-center items-center gap-6'>
             <div className='shadow-xl w-4/5 flex flex-col rounded-xl border border-transparent p-4'>
                 <img src={Logo} width={200} height={200} className='self-end'/>
                 <p className='text-xl font-bold'>Sistem pakar penyakit Scabies</p>
             </div>
-            <p className='text-primary text-2xl text-left font-bold w-4/5'>Lainnya</p>
+            <p className='text-[#0EB96F] text-2xl text-left font-bold w-4/5'>Lainnya</p>
             <div 
                 className='flex p-4 rounded-xl justify-between shadow-xl border border-transparent items-center w-4/5'
                 onClick={handleCekKondisi}

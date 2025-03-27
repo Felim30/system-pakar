@@ -1,5 +1,5 @@
 import { GeneralContainer } from '@/components/general-container';
-import Negative from '../../../../public/assets/36256551.png'
+import Negative from '../../../../public/assets/terjangkit.svg'
 import { useHistory } from 'react-router';
 import { TitleBar } from '@/components/bar/title-bar';
 
@@ -14,7 +14,7 @@ const ListPenyakit: React.FC = () => {
   return (
       <GeneralContainer>
        <TitleBar title='Penyakit' />
-        <div className='h-screen overflow-scroll w-screen flex flex-col bg-foreground justify-start items-center gap-6 mt-24'>
+        <div className='h-screen overflow-scroll w-screen flex flex-col bg-white justify-start items-center gap-6 mt-24'>
           <div 
             className='flex p-6 justify-between rounded-xl shadow-xl border border-transparent items-center w-4/5'
             onClick={handlePencegahan}

@@ -2,11 +2,6 @@
 http://ionicframework.com/docs/theming/ */
 @import "tailwindcss";
 
-@theme {
-   --color-primary : #0EB96F;
-   --color-foreground : white;
-   --color-danger: #FA1010
-}
 
 ion-tab-bar {
    --background: white;
@@ -21,49 +16,5 @@ ion-tab-bar {
    --overflow: hidden;
  }
 
- .radio-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
 
-.radio-option {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-}
 
-/* Hide the default radio button */
-.radio-option input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create custom radio button */
-.radio-checkmark {
-  position: relative;
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 50%;
-  margin-right: 10px;
-  transition: all 0.2s;
-}
-
-.radio-option input[type="radio"]:checked + .radio-checkmark:after {
-  content: "";
-  position: absolute;
-  display: block;
-  top: 4px;
-  left: 4px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #0EB96F; 
-}

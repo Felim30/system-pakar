@@ -8,28 +8,28 @@ const Profile: React.FC = () => {
 
   return (
       <GeneralContainer>
-        <div className='h-screen overflow-scroll w-screen flex flex-col bg-foreground justify-center items-center gap-4'>
+        <div className='h-screen overflow-scroll w-screen flex flex-col bg-white justify-center items-center gap-4'>
             <img className='rounded-full' src={ProfileImg} width={180} height={180}/>
               <input 
                 type='text' 
                 placeholder='Username' 
-                className='py-4 !text-primary !text-xl w-2/3 focus:outline-none border border-b-primary border-transparent'
+                className='py-4 !text-[#0EB96F] !text-xl w-2/3 focus:outline-none border border-b-[#0EB96F] border-transparent'
               />
             <div className="flex items-center justify-between w-2/3">
                 <input 
                   type='number' 
                   placeholder='Tinggi' 
-                  className='py-4 !text-primary !text-xl w-4/5 focus:outline-none border border-b-primary border-transparent'
+                  className='py-4 !text-[#0EB96F] !text-xl w-4/5 focus:outline-none border border-b-[#0EB96F] border-transparent'
                 />
-                <p className='text-primary text-xl'>cm</p>
+                <p className='text-[#0EB96F] text-xl'>cm</p>
             </div>
             <div className="flex items-center justify-between w-2/3">
                 <input 
                   type='number' 
                   placeholder='Berat' 
-                  className='py-4 !text-primary !text-xl w-4/5 focus:outline-none border border-b-primary border-transparent'
+                  className='py-4 !text-[#0EB96F] !text-xl w-4/5 focus:outline-none border border-b-[#0EB96F] border-transparent'
                 />
-                <p className='text-primary text-xl'>kg</p>
+                <p className='text-[#0EB96F] text-xl'>kg</p>
             </div>
             <div className="flex items-center justify-between w-2/3">
               <RadioInput 

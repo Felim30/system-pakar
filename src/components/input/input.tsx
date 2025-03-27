@@ -16,14 +16,14 @@ export const Input : React.FC<InputProps> = ({type , isPassword = false, ...prop
     }
 
     return (
-        <div className="bg-transparent !text-foreground w-3/5 outline-none border-b-2 border-solid border-b-foreground border-transparent py-4 flex items-center justify-between">
+        <div className="bg-transparent !text-white w-3/5 outline-none border-b-2 border-solid border-b-white border-transparent py-4 flex items-center justify-between">
             <input 
                 type={!isVisible && isPassword ? "password" : type} 
                 {...props}
                 className="outline-none"
             />
            {isPassword && <button onClick={Toggle}>
-                <IonIcon icon={isVisible ? eyeOff : eyeSharp} className="text-2xl text-foreground focus:outline-none" />
+                <IonIcon icon={isVisible ? eyeOff : eyeSharp} className="text-2xl text-white focus:outline-none" />
             </button>}
         </div>
     )
