@@ -1,29 +1,53 @@
 import { GeneralContainer } from '@/components/general-container';
-import { cekKondisi, dataGejala } from '../../../../data';
 import { useState, useEffect } from 'react';
 import RadioInput from '@/components/input/radio-input';
 import { Button } from '@/components/button/Button';
 import { TitleBar } from '@/components/bar/title-bar';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import useGejala from '@/view-model/gejala-view-model';
+import useRiwayat from '@/view-model/riwayat-view-model';
+
+interface Gejala {
+  id: string,
+  namaGejala: string,
+
+}
 
 const CekKondisi: React.FC = () => {
   const [index, setIndex] = useState<number>(0);
-  const [gejala, setGejala] = useState<number[]>([]);
-  const [selected, setSelected] = useState<Record<number, boolean>>({});
+  const [selectedGeJala, setSelectedGejala] = useState<string[]>([]);
+  const [gejala , setGejala] = useState<Gejala[]>([])
+  const [selected, setSelected] = useState<Record<string, boolean>>({});
+  const [disabled , setDisabled] = useState<boolean>(false)
   const history = useHistory();
 
-  useEffect(() => {
-    const currentId = dataGejala[index].id;
-    if (!(currentId in selected)) {
-      setSelected((prev) => ({ ...prev, [currentId]: true }));
-      setGejala((prev) => (prev.includes(currentId) ? prev : [...prev, currentId]));
-    }
+  const { callbackedGetGejala } = useGejala()
+  const { konsultasi } = useRiwayat()
 
-    console.log(selected)
-  }, [index, selected, gejala]);
+  useEffect(() => {
+    const getGejala = async () => {
+      const response = await callbackedGetGejala();
+      console.log(response);
+      setGejala(response);
+    };
+
+    getGejala();
+  }, [callbackedGetGejala]);
+
+  useEffect(() => {
+    if (!gejala[index]) return;
+
+    const currentId = gejala[index].id;
+    setSelected((prev) => {
+      if (currentId in prev) return prev;
+      return { ...prev, [currentId]: false }; 
+    });
+
+  }, [index, gejala, selected ,selectedGeJala]);
+
 
   const handleIncrement = () => {
-    if (index < dataGejala.length - 1) {
+    if (index < gejala.length - 1) {
       setIndex((prev) => prev + 1);
     }
   };
@@ -34,20 +58,26 @@ const CekKondisi: React.FC = () => {
     }
   };
 
-  const handleGejalaChange = (value: number, isYes: boolean) => {
-    setSelected((prev) => ({ ...prev, [value]: isYes }));
-    setGejala((prev) => {
+  const handleGejalaChange = (value: Gejala, isYes: boolean) => {
+    setSelected((prev) => ({ ...prev, [value.id]: isYes }));
+    setSelectedGejala((prev) => {
       if (isYes) {
-        return prev.includes(value) ? prev : [...prev, value]; 
+        return prev.includes(value.id) ? prev : [...prev, value.id]; 
       }
-      return prev.filter((item) => item !== value); 
+      return prev.filter((item) => item !== value.id); 
     });
   };
 
   const checkAndRedirect = async () => {
-
-    const diagnosa = await cekKondisi(gejala);
-    history.push(`/main/hasil/${diagnosa}`);
+    setDisabled(true)
+    console.log(selectedGeJala)
+    const response = await konsultasi(selectedGeJala);
+    const penyakit = response.penyakit
+    const diagnosa : string = penyakit == null ? "sehat" : penyakit.namaPenyakit;
+    if(diagnosa){
+      history.push(`/main/hasil/${diagnosa}`);
+      setDisabled(false)
+    }
   };
   
   return (
@@ -55,30 +85,30 @@ const CekKondisi: React.FC = () => {
       <TitleBar title="Cek Kondisi" />
       <div className="h-screen overflow-scroll w-screen flex flex-col bg-white justify-center items-center gap-6">
         <p className="font-semibold">Silahkan jawab pertanyaan berikut</p>
-        <div className="bg-[#0EB96F] p-4 flex flex-col gap-4 rounded-lg border-2 border-white drop-shadow-lg w-4/5">
+        {gejala[index] &&<div className="bg-[#0EB96F] p-4 flex flex-col gap-4 rounded-lg border-2 border-white drop-shadow-lg w-4/5">
           <p className="text-xl text-white">
-            Apakah anda mengalami {dataGejala[index].name}?
+            Apakah anda mengalami {gejala[index].namaGejala}?
           </p>
           <RadioInput
             label="Yes"
             variant="foreground"
             name="data"
-            checked={selected[dataGejala[index].id] === true}
-            onChange={() => handleGejalaChange(dataGejala[index].id, true)}
+            checked={selected[gejala[index].id] === true}
+            onChange={() => handleGejalaChange(gejala[index], true)}
           />
           <RadioInput
             label="No"
             name="data"
             variant="foreground"
-            checked={selected[dataGejala[index].id] === false}
-            onChange={() => handleGejalaChange(dataGejala[index].id, false)}
+            checked={selected[gejala[index].id] === false}
+            onChange={() => handleGejalaChange(gejala[index], false)}
           />
-        </div>
+        </div>}
         <div className="flex gap-5 w-4/5 justify-between">
           <Button text="Kembali" variant="foreground" onClick={handleDecrement} />
           
-          {index !== dataGejala.length - 1 ? <Button text="Lanjut" variant="primary" onClick={handleIncrement} /> 
-          : <Button text="Submit" variant='primary' onClick={checkAndRedirect}/>}
+          {index !== gejala.length - 1 ? <Button text="Lanjut" variant="primary" onClick={handleIncrement} /> 
+          : <Button text="Submit" variant='primary' onClick={checkAndRedirect} disable={disabled}/>}
         </div>
       </div>
     </GeneralContainer>

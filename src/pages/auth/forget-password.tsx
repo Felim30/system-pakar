@@ -4,17 +4,64 @@ import { Input } from '@/components/input/input';
 import { useState } from 'react';
 import { Button } from '@/components/button/Button';
 import { useHistory } from 'react-router';
+import useAuth from '@/view-model/auth-view-model';
+import { useIonToast } from '@ionic/react';
 
 const ForgetPassword: React.FC = () => {
 
-  const [text , setText] = useState<string>("");
+  const [username , setUsername] = useState<string>("");
+  const [password , setPassword] = useState<string>("");
+  const [confirmPassword , setConfirmPassword] = useState<string>("");
+  const [loading , setLoading] = useState<boolean>(false);
 
   const nav = useHistory()
 
   const handleToLogin = () => {
-    console.log(text)
     nav.push('/home')
   }
+
+  const { handleForgetPassword } = useAuth();
+
+  const [present] = useIonToast();
+  
+    const presentToast = (text : string , color: string) => {
+        present({
+          message: text,
+          duration: 1500,
+          color: color,
+          position: "bottom",
+        });
+    };
+
+  const handleSubmit = async (username : string , password: string, confirmPassword: string) => {
+    setLoading(true)
+    try {
+      await handleForgetPassword(username, password, confirmPassword);
+
+      presentToast("Password is changed", "success")
+
+       setTimeout(() => {
+          nav.push("/home");
+      },1000)
+
+    } catch (error) {
+
+      if (error instanceof Error) {
+
+        presentToast(error.message, 'danger');
+        console.error(error);
+
+      } else {
+
+        presentToast("Terjadi kesalahan tidak terduga", 'danger');
+        console.error(error);
+
+      }
+    }finally{
+      setLoading(false)
+    }
+  }
+
 
   return (
       <GeneralContainer>
@@ -23,20 +70,23 @@ const ForgetPassword: React.FC = () => {
          <p className='text-white font-medium text-2xl'>Lupa password</p>
          <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             placeholder='Username'
+            value={username}
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             placeholder='Password'
             isPassword={true}
+            value={password}
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
             placeholder='Confirm Password'
             isPassword={true}
+            value={confirmPassword}
           />
           <div className='flex gap-4 w-3/5 justify-between h-auto'>
               <Button 
@@ -45,9 +95,10 @@ const ForgetPassword: React.FC = () => {
                 onClick={handleToLogin}
               />
               <Button 
-                text='Submit'
+                disable={loading}
+                text={loading ? 'Submitting...' : 'Submit'}
+                onClick={() => handleSubmit(username, password, confirmPassword)}
                 variant='primary'
-                onClick={() => setText("")}
               />
           </div>
         </div>

@@ -1,0 +1,66 @@
+import apiClient from "@/lib/apiUrl"
+import { GET_USER, UPDATE_USER } from "@/lib/constant"
+import setHeaders from "@/lib/getHeaders"
+import { useCallback } from "react";
+
+interface User {
+  username: string,
+  tinggi: number,
+  berat: number,
+  jenisKelamin: string
+}
+
+const useUser = () => {
+  const getUser = useCallback(async () => {
+    try {
+      const headers = await setHeaders();
+
+      const response = await apiClient.get(GET_USER, { headers: headers });
+      
+      if (response.status !== 200) {
+        return response.data.message;
+      } else {
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      throw error;
+    }
+  }, []);
+
+  const updateUser = async (user: User, profileFile: File | null) => {
+    try {
+      const headers = await setHeaders();
+      const formData = new FormData();
+  
+      formData.append(
+        "updateUserRequest",
+        new Blob([JSON.stringify(user)], { type: "application/json" })
+      );
+  
+      if (profileFile) {
+        formData.append("profile", profileFile);
+      }
+  
+      const response = await apiClient.post(UPDATE_USER, formData, {
+        headers: {
+          ...headers,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+  
+      return response.data;
+    } catch (error) {
+      console.error("Error updating user:", error);
+      throw error;
+    }
+  };
+  
+
+  return {
+    getUser,
+    updateUser
+  };
+};
+
+export default useUser;

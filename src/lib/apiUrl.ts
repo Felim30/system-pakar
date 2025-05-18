@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { MAIN_URL } from './constant';
 
 const apiClient = axios.create({
-    baseURL : "http://localhost:8080/"
+    baseURL : MAIN_URL
 })
 
 export default apiClient;

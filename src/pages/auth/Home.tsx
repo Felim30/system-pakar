@@ -1,45 +1,88 @@
 import { Logo } from '@/components/logo/logo'
 import { GeneralContainer } from '@/components/general-container';
 import { Input } from '@/components/input/input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@/components/button/Button';
+import initStorage from '@/lib/db';
+import useAuth from '@/view-model/auth-view-model';
+import { useIonToast } from '@ionic/react';
 
 const Home: React.FC = () => {
 
-  const [loading , setLoading] = useState<boolean>(false)
-  const [text , setText] = useState<string>("")
+  const [loading , setLoading] = useState<boolean>(false);
+  const [username , setUsername] = useState<string>("");
+  const [password , setPassword] = useState<string>("");
+  const [present] = useIonToast();
+
+  const presentToast = (text : string , color: string) => {
+      present({
+        message: text,
+        duration: 1500,
+        color: color,
+        position: "bottom",
+      });
+  };
+
+  const { handleLogin } = useAuth();
+
   const history = useHistory()
 
-  const handleToLogin = () => {
-    history.push('/daftar')
-  }
-  
-  const handleMainMenu = () => {
-    setLoading (true)
-
-    setTimeout(() => {
-      console.log(text)
-      history.push('/main');
-      setLoading (false);
-    }, 3000)
+  const handleToLogin = async (name: string , password: string) => {
+    try {
+      setLoading(true);
+      const token = await handleLogin(name , password);
+      if(token){
+        
+        presentToast("Login success", "success");
+        setTimeout(() => {
+          history.push("/main");
+        }, 1000) 
+       
+      }
+    } catch (error) {
+      presentToast("Login failed please check credentials", 'danger');
+      console.error(error);
+    }finally{
+      setLoading(false);
+    }
     
+  }
+
+  useEffect(() => {
+    const getUser = async () => {
+      const storage = await initStorage();
+      const token = await storage.get("token");
+      
+      if(token){
+        history.push("/main");
+      }
+      
+    }
+
+    getUser();
+  }, [history])
+  
+  const handleToRegister = () => {
+   history.push("/daftar") 
   }
 
   return (
       <GeneralContainer>
-        <div className='h-screen w-screen flex flex-col bg-[#0EB96F] justify-center items-center gap-4'>
+        <div className='h-screen w-screen  flex flex-col bg-[#0EB96F] justify-center items-center gap-4'>
          <Logo /> 
          <p className='text-white font-medium text-4xl'>Login</p>
          <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             placeholder='Username'
+            value={username}
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             placeholder='Password'
+            value={password}
             isPassword={true}
           />
           <Link to='/forget-password' className='underline !text-white'>
@@ -49,13 +92,13 @@ const Home: React.FC = () => {
               <Button 
                 text='Daftar'
                 variant='foreground'
-                onClick={handleToLogin}
+                onClick={handleToRegister}
               />
               <Button 
-                text={loading ? '' : 'Login'}
+                text={loading ? 'Login...' : 'Login'}
                 variant='primary'
                 disable={loading}
-                onClick={handleMainMenu}
+                onClick={() => handleToLogin(username , password)}
               />
           </div>
         </div>

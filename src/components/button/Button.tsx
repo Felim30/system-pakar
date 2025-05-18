@@ -1,4 +1,3 @@
-import { IonSpinner } from "@ionic/react";
 import { ReactNode } from "react";
 
 type ButtonProps =  {
@@ -15,12 +14,7 @@ type ButtonProps =  {
         {...props}
         disabled={disable}
       >
-        {disable ?(
-          <div className="flex gap-2 items-center justify-center">
-            <IonSpinner className="text-white "/>
-            <span>Loading ...</span>
-          </div>
-      ) : text}
+        {text}
       </button>
     );
   };

@@ -1,6 +1,6 @@
 import { GeneralContainer } from "@/components/general-container";
 import { useParams, useHistory } from "react-router";
-import Sehat from "../../public/assets/positive.svg";
+import Sehat from "../../public/assets/help.png";
 import { Button } from "@/components/button/Button";
 import Penyakit from "../../public/assets/terjangkit.svg";
 
@@ -21,8 +21,8 @@ const Hasil: React.FC = () => {
           Hasil Diagnosa menunjukkan bahwa
         </p>
         <img src={sehat ? Sehat : Penyakit} width={250} height={250} />
-        <p className="text-xl font-semibold mt-10 mb-5">
-          Anda {sehat ? "tidak" : ""} terjangkit Penyakit {!sehat ? diagnosa : ""}
+        <p className="text-md text-center font-semibold mt-10 mb-3">
+          {sehat ? "Sistem Kami belum bisa mendeteksi penyakit yang dialami anda disarankan untuk menghubungi layanan kesehatan" : `Anda  terjangkit Penyakit ${diagnosa}`}
         </p>
         <Button text="Berikutnya" variant="primary" onClick={goHome} size="4/5" />
       </div>

@@ -37,8 +37,12 @@ import MainTabs from './pages/main/main-menu';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
+const App: React.FC = () => {
+
+  
+  
+ return (
+ <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/home">
@@ -59,6 +63,7 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+  )
+};
 
 export default App;

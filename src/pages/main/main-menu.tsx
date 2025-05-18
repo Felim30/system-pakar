@@ -38,7 +38,7 @@ const MainTabs: React.FC = () => {
         <Route path="/main/cek-kondisi">
           <CekKondisi />
         </Route>
-        <Route path="/main/pencegahan">
+        <Route path="/main/pencegahan/:id">
           <Pencegahan />
         </Route>
         <Route path="/main/profile">
