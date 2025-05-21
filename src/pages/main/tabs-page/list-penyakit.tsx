@@ -4,6 +4,7 @@ import { TitleBar } from '@/components/bar/title-bar';
 import { useEffect, useState } from 'react';
 import usePenyakit from '@/view-model/penyakit-view-model';
 import { MAIN_URL } from '@/lib/constant';
+import { IonLabel, IonSpinner } from '@ionic/react';
 
 interface Penyakit{
   id: string,
@@ -17,11 +18,10 @@ const ListPenyakit: React.FC = () => {
   const [penyakitList , setPenyakitList] = useState<Penyakit[]>([]);
 
   useEffect(() => {
-
     const getAllPenyakitList = async () => {
       const response = await getAllPenyakit();
-      console.log(response)
       setPenyakitList(response)
+
     }
 
     getAllPenyakitList();
@@ -38,20 +38,27 @@ const ListPenyakit: React.FC = () => {
       <GeneralContainer>
        <TitleBar title='Penyakit' />
         <div className='h-screen overflow-scroll w-screen flex flex-col bg-white justify-start items-center gap-6 mt-24'>
-          {penyakitList.map((penyakit) => {
-            return (
-            <div 
-              key={penyakit.id}
-              className='flex p-6 justify-between rounded-xl shadow-xl border border-transparent items-center w-4/5'
-              onClick={() => handlePencegahan(penyakit.id)}
-            >
-              <p className={`font-bold text-black text-2xl`}>{penyakit.namaPenyakit}</p>
-              <img src={`${MAIN_URL}${penyakit.penyakitProfile}`} width={40} height={40} />
-          </div>
-          )
-          })}
-          
-          
+          {penyakitList.length == 0 ?  (
+              <>
+                <IonLabel>Loading</IonLabel>
+                <IonSpinner name="dots"></IonSpinner>
+              </>
+             ) : 
+             <>
+                {penyakitList.map((penyakit) => {
+                  return (
+                  <div 
+                    key={penyakit.id}
+                    className='flex p-6 justify-between rounded-xl shadow-xl border border-transparent items-center w-4/5'
+                    onClick={() => handlePencegahan(penyakit.id)}
+                  >
+                    <p className={`font-bold text-black text-2xl`}>{penyakit.namaPenyakit}</p>
+                    <img src={`${MAIN_URL}${penyakit.penyakitProfile}`} width={40} height={40} />
+                  </div>
+                )
+              })}
+             </>
+            }
         </div> 
       </GeneralContainer>
   );

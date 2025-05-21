@@ -105,10 +105,20 @@ const CekKondisi: React.FC = () => {
           />
         </div>}
         <div className="flex gap-5 w-4/5 justify-between">
-          <Button text="Kembali" variant="foreground" onClick={handleDecrement} />
+          <Button 
+            text="Kembali" 
+            variant="foreground" 
+            onClick={handleDecrement}
+          />
           
           {index !== gejala.length - 1 ? <Button text="Lanjut" variant="primary" onClick={handleIncrement} /> 
-          : <Button text="Submit" variant='primary' onClick={checkAndRedirect} disable={disabled}/>}
+          : <Button 
+              text={disabled ? "Submitting..." : "Submit"} 
+              variant='primary' 
+              onClick={checkAndRedirect} 
+              disable={disabled}
+            />
+          }
         </div>
       </div>
     </GeneralContainer>

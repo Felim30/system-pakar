@@ -1,5 +1,5 @@
 //main url
-export const MAIN_URL = "http://localhost:8080"
+export const MAIN_URL = "https://system-pakar-6a3b5492dc87.herokuapp.com"
 
 //auth url
 export const LOGIN = "api/auth/login"
