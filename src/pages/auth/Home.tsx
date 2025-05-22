@@ -1,10 +1,9 @@
 import { Logo } from '@/components/logo/logo'
 import { GeneralContainer } from '@/components/general-container';
 import { Input } from '@/components/input/input';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@/components/button/Button';
-import initStorage from '@/lib/db';
 import useAuth from '@/view-model/auth-view-model';
 import { useIonToast } from '@ionic/react';
 
@@ -49,19 +48,6 @@ const Home: React.FC = () => {
     
   }
 
-  useEffect(() => {
-    const getUser = async () => {
-      const storage = await initStorage();
-      const token = await storage.get("token");
-      
-      if(token){
-        history.push("/main");
-      }
-      
-    }
-
-    getUser();
-  }, [history])
   
   const handleToRegister = () => {
    history.push("/daftar") 
@@ -69,7 +55,7 @@ const Home: React.FC = () => {
 
   return (
       <GeneralContainer>
-        <div className='h-screen w-screen  flex flex-col bg-[#0EB96F] justify-center items-center gap-4'>
+        <div className='h-screen w-screen mb-8 flex flex-col bg-[#0EB96F] justify-center items-center gap-4'>
          <Logo /> 
          <p className='text-white font-medium text-4xl'>Login</p>
          <Input 

@@ -41,7 +41,7 @@ const ListPenyakit: React.FC = () => {
           {penyakitList.length == 0 ?  (
               <>
                 <IonLabel>Loading</IonLabel>
-                <IonSpinner name="dots"></IonSpinner>
+                <IonSpinner name="dots" style={{ color: '#000000' }} />
               </>
              ) : 
              <>

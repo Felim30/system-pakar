@@ -32,7 +32,7 @@ const History: React.FC = () => {
       <p className="text-xl font-bold p-8 w-full text-center fixed bg-white text-black">
         Riwayat Pemeriksaan
       </p>
-      <div className="h-screen overflow-scroll w-screen flex flex-col bg-white justify-start items-center gap-6 mt-24">
+      <div className="h-screen overflow-scroll w-screen flex flex-col bg-white justify-start items-center gap-6 mt-20">
         {riwayats.length > 0 ? (
           riwayats.map((riwayat) => (
             <div
@@ -47,7 +47,7 @@ const History: React.FC = () => {
                 >
                   {riwayat.penyakit ? riwayat.penyakit.namaPenyakit : 'Tidak terdeteksi'}
                 </p>
-                <p>
+                <p className='text-black'>
                  {moment(riwayat.createdDate).format('llll')}
                 </p>
               </div>

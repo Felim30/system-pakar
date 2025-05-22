@@ -34,27 +34,27 @@ import './theme/variables.css';
 import ForgetPassword from './pages/auth/forget-password';
 import Register from './pages/auth/register';
 import MainTabs from './pages/main/main-menu';
+import PrivateRouter from './components/private-router';
 
 setupIonicReact();
 
 const App: React.FC = () => {
-
-  
-  
  return (
  <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/home">
-          <Home />
+          <PrivateRouter route={<Home />} />
+          
         </Route>
         <Route exact path="/main">
           <MainTabs />
         </Route>
         <Route exact path="/daftar">
-          <Register />
+          <PrivateRouter route={<Register />} />
         </Route>
         <Route path="/forget-password">
+          <PrivateRouter route={ <ForgetPassword />} />
           <ForgetPassword />
         </Route>
         <Route exact path="/">
