@@ -32,7 +32,7 @@ const History: React.FC = () => {
       <p className="text-xl font-bold p-8 w-full text-center fixed bg-white text-black">
         Riwayat Pemeriksaan
       </p>
-      <div className={`h-screen overflow-scroll w-screen flex flex-col bg-white ${riwayats.length > 0 ? "justify-start" : 'justify-center '} items-center gap-6 mt-24`}>
+      <div className={`h-screen overflow-scroll w-screen flex flex-col bg-white ${riwayats.length > 0 ? "justify-start" : 'justify-center '} items-center gap-6 mt-[5.5rem]`}>
         {riwayats.length > 0 ? (
           riwayats.map((riwayat) => (
             <div
