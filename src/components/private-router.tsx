@@ -16,7 +16,7 @@ const PrivateRouter : React.FC<{route : ReactNode}>= ({route}) => {
       }
     }
     checkToken();
-  })
+  },[])
 
   return auth ? <Redirect to="/main" /> : route
 }
