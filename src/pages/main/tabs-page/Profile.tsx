@@ -143,13 +143,13 @@ const Profile: React.FC = () => {
       <GeneralContainer>
         <div className='h-screen overflow-scroll w-screen flex flex-col bg-white justify-center items-center gap-4'>
           <div className='relative'>
-            <img
-              className='rounded-full cursor-pointer object-cover'
-              src={profile ? profile : ProfileImg}
-              width={180}
-              height={180}
-              
-            />
+           <div className="w-36 h-36 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+              <img
+                className="object-cover w-full h-full"
+                src={profile ? profile : ProfileImg}
+                alt="Profile"
+              />
+            </div>
             <PencilIcon 
                 className='absolute w-[4rem] p-4 h-[4rem] bottom-2 left-[7.5rem] rounded-full h-2rem bg-gray-500 text-white' 
                 onClick={handleProfileClick}
