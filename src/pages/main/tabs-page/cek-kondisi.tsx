@@ -84,7 +84,7 @@ const CekKondisi: React.FC = () => {
     <GeneralContainer>
       <TitleBar title="Cek Kondisi" />
       <div className="h-screen overflow-scroll w-screen flex flex-col bg-white justify-center items-center gap-6">
-        <p className="font-semibold">Silahkan jawab pertanyaan berikut</p>
+        <p className="font-semibold ">Silahkan jawab pertanyaan berikut</p>
         {gejala[index] &&<div className="bg-[#0EB96F] p-4 flex flex-col gap-4 rounded-lg border-2 border-white drop-shadow-lg w-4/5">
           <p className="text-xl text-white">
             Apakah anda mengalami {gejala[index].namaGejala}?
