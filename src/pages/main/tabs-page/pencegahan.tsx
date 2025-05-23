@@ -49,7 +49,7 @@ const Pencegahan: React.FC = () => {
             {penyakit.penyakitProfile == "" ? 
             (
               <>
-                  <IonLabel>Loading</IonLabel>
+                  <IonLabel style={{ color: '#000000' }}>Loading</IonLabel>
                   <IonSpinner name="dots" style={{ color: '#000000' }} />
               </>
             )
