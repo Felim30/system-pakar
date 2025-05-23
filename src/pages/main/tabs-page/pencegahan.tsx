@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import usePenyakit from '@/view-model/penyakit-view-model';
 import { useEffect, useState } from 'react';
 import { MAIN_URL } from '@/lib/constant';
-import { IonLabel, IonSpinner } from '@ionic/react';
+import Loading from '@/components/Loading';
 
 interface Pencegahan {
   id: string
@@ -48,10 +48,7 @@ const Pencegahan: React.FC = () => {
         <div className='flex flex-col bg-white justify-center h-full items-center gap-y-6 mt-4'>
             {penyakit.penyakitProfile == "" ? 
             (
-              <>
-                  <IonLabel style={{ color: '#0EB96F' }}>Loading</IonLabel>
-                  <IonSpinner name="dots" style={{ color: '#0EB96F' }} />
-              </>
+             <Loading />
             )
              : (
                 <>

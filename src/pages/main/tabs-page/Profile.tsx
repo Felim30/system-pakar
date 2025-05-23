@@ -7,7 +7,7 @@ import useUser from '@/view-model/user-view-model';
 import { useHistory } from 'react-router';
 import { MAIN_URL } from '@/lib/constant';
 import { IonInput, useIonToast } from '@ionic/react';
-
+import Loading from '@/components/Loading';
 interface User {
   username: string;
   tinggi: number;
@@ -47,6 +47,7 @@ const Profile: React.FC = () => {
 
   const history = useHistory();
   const [profile, setProfile] = useState<string>('');
+  const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [submitedProfile, setSubmitedProfile] = useState<File | null>(null);
   const { getUser, updateUser } = useUser();
@@ -92,6 +93,7 @@ const Profile: React.FC = () => {
           berat: userapi.berat || 0,
           jenisKelamin: userapi.jenisKelamin || 'Laki_laki',
         });
+        setIsLoadingUser(false)
       }
 
       if (userapi.profile !== null) {
@@ -129,89 +131,97 @@ const Profile: React.FC = () => {
   return (
     <GeneralContainer>
       <div className="h-screen overflow-scroll w-screen flex flex-col bg-white justify-center items-center gap-4">
-        <div className="relative">
-          <div className="w-36 h-36 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
-            <img
-              className="object-cover w-full h-full"
-              src={profile ? profile : ProfileImg}
-              alt="Profile"
+        {isLoadingUser ?
+        (
+         <Loading />
+        )
+         : (
+          <>
+            <div className="relative">
+            <div className="w-36 h-36 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+              <img
+                className="object-cover w-full h-full"
+                src={profile ? profile : ProfileImg}
+                alt="Profile"
+              />
+            </div>
+            <PencilIcon
+              className="absolute w-[4rem] p-4 h-[4rem] bottom-2 left-[7.5rem] rounded-full bg-gray-500 text-white"
+              onClick={handleProfileClick}
             />
           </div>
-          <PencilIcon
-            className="absolute w-[4rem] p-4 h-[4rem] bottom-2 left-[7.5rem] rounded-full bg-gray-500 text-white"
-            onClick={handleProfileClick}
+
+          <input
+            type="file"
+            ref={ref}
+            name="file"
+            onChange={handleProfileChange}
+            className="hidden"
           />
-        </div>
 
-        <input
-          type="file"
-          ref={ref}
-          name="file"
-          onChange={handleProfileChange}
-          className="hidden"
-        />
-
-        <IonInput
-          label="Username"
-          labelPlacement="floating"
-          readonly
-          value={user.username}  
-          className="!text-[#0EB96F] !text-md !w-2/3 border-b border-[#0EB96F]"
-        />
-
-        <div className="flex items-center justify-between w-2/3">
           <IonInput
-            label="Tinggi"
+            label="Username"
             labelPlacement="floating"
-            type="number"
-            value={user.tinggi}
-            className="!text-[#0EB96F] !text-md w-4/5 border-b border-[#0EB96F]"
-            
-            onIonInput={(e) => handleUserChange('tinggi', e.detail.value as string)}
+            readonly
+            value={user.username}  
+            className="!text-[#0EB96F] !text-md !w-2/3 border-b border-[#0EB96F]"
           />
-          <p className="text-[#0EB96F] text-md">cm</p>
-        </div>
 
-        <div className="flex items-center justify-between w-2/3">
-          <IonInput
-            label="Berat"
-            labelPlacement="floating"
-            type="number"
-            value={user.berat}
-            fill="outline"
-            className="!text-[#0EB96F] !text-md w-4/5 border-b border-[#0EB96F]"
-            onIonInput={(e) => handleUserChange('berat', e.detail.value as string)}
-          />
-          <p className="text-[#0EB96F] text-md">kg</p>
-        </div>
+          <div className="flex items-center justify-between w-2/3">
+            <IonInput
+              label="Tinggi"
+              labelPlacement="floating"
+              type="number"
+              value={user.tinggi}
+              className="!text-[#0EB96F] !text-md w-4/5 border-b border-[#0EB96F]"
+              
+              onIonInput={(e) => handleUserChange('tinggi', e.detail.value as string)}
+            />
+            <p className="text-[#0EB96F] text-md">cm</p>
+          </div>
 
-        <div className="flex items-center justify-between w-2/3">
-          <RadioInput
-            id="Laki_laki"
-            value="Laki_laki"
-            name="jenisKelamin"
-            label="Laki-laki"
-            checked={user.jenisKelamin === 'Laki_laki'}
-            onChange={(e) => handleUserChange('jenisKelamin', e.target.value)}
-          />
-          <RadioInput
-            id="Perempuan"
-            value="Perempuan"
-            name="jenisKelamin"
-            label="Perempuan"
-            checked={user.jenisKelamin === 'Perempuan'}
-            onChange={(e) => handleUserChange('jenisKelamin', e.target.value)}
-          />
-        </div>
+          <div className="flex items-center justify-between w-2/3">
+            <IonInput
+              label="Berat"
+              labelPlacement="floating"
+              type="number"
+              value={user.berat}
+              fill="outline"
+              className="!text-[#0EB96F] !text-md w-4/5 border-b border-[#0EB96F]"
+              onIonInput={(e) => handleUserChange('berat', e.detail.value as string)}
+            />
+            <p className="text-[#0EB96F] text-md">kg</p>
+          </div>
 
-        <div className="flex justify-between w-2/3 gap-4">
-          <Button text="Back" variant="foreground" onClick={handleBack} />
-          <Button
-            text={loading ? 'Editing...' : 'Edit'}
-            variant="primary"
-            onClick={updateUserProfile}
-          />
-        </div>
+          <div className="flex items-center justify-between w-2/3">
+            <RadioInput
+              id="Laki_laki"
+              value="Laki_laki"
+              name="jenisKelamin"
+              label="Laki-laki"
+              checked={user.jenisKelamin === 'Laki_laki'}
+              onChange={(e) => handleUserChange('jenisKelamin', e.target.value)}
+            />
+            <RadioInput
+              id="Perempuan"
+              value="Perempuan"
+              name="jenisKelamin"
+              label="Perempuan"
+              checked={user.jenisKelamin === 'Perempuan'}
+              onChange={(e) => handleUserChange('jenisKelamin', e.target.value)}
+            />
+          </div>
+
+          <div className="flex justify-between w-2/3 gap-4">
+            <Button text="Back" variant="foreground" onClick={handleBack} />
+            <Button
+              text={loading ? 'Editing...' : 'Edit'}
+              variant="primary"
+              onClick={updateUserProfile}
+            />
+          </div>
+        </>
+      ) } 
       </div>
     </GeneralContainer>
   );

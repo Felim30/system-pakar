@@ -4,7 +4,7 @@ import { TitleBar } from '@/components/bar/title-bar';
 import { useEffect, useState } from 'react';
 import usePenyakit from '@/view-model/penyakit-view-model';
 import { MAIN_URL } from '@/lib/constant';
-import { IonLabel, IonSpinner } from '@ionic/react';
+import Loading from '@/components/Loading';
 
 interface Penyakit{
   id: string,
@@ -39,10 +39,7 @@ const ListPenyakit: React.FC = () => {
        <TitleBar title='Penyakit' />
         <div className='h-screen overflow-scroll w-screen flex flex-col bg-white justify-start items-center gap-6 mt-24'>
           {penyakitList.length == 0 ?  (
-              <>
-                <IonLabel style={{ color: '#0EB96F' }}>Loading</IonLabel>
-                <IonSpinner name="dots" style={{ color: '#0EB96F' }} />
-              </>
+             <Loading />
              ) : 
              <>
                 {penyakitList.map((penyakit) => {
