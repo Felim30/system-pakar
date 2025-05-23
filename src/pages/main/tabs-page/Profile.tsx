@@ -164,7 +164,7 @@ const Profile: React.FC = () => {
             labelPlacement="floating"
             readonly
             value={user.username}  
-            className="input-green"
+            className="input-green !w-2/3"
           />
 
           <div className="flex items-center justify-between w-2/3">
