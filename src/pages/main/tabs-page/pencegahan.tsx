@@ -60,7 +60,7 @@ const Pencegahan: React.FC = () => {
                     width={150}
                     height={150}
                   />
-                  <div className='w-3/4 h-2/5 overflow-y-scroll font-light'>
+                  <div className='w-3/4 h-2/5 overflow-y-scroll font-light text-black'>
                     {penyakit.deskripsi}
                     <p>Langkah pencegahan yang bisa diambil yaitu : </p>
                     <br/>
