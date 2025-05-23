@@ -164,7 +164,7 @@ const Profile: React.FC = () => {
             labelPlacement="floating"
             readonly
             value={user.username}  
-            className="input-green !w-2/3"
+            className="input-green !w-2/3 border-b-1 border-gray-400"
           />
 
           <div className="flex items-center justify-between w-2/3">
@@ -173,7 +173,7 @@ const Profile: React.FC = () => {
               labelPlacement="floating"
               type="number"
               value={user.tinggi}
-              className="input-green"
+              className="input-green border-b-1 border-gray-400"
               onIonInput={(e) => handleUserChange('tinggi', e.detail.value as string)}
             />
             <p className="text-[#0EB96F] text-md">cm</p>
@@ -185,7 +185,7 @@ const Profile: React.FC = () => {
               labelPlacement="floating"
               type="number"
               value={user.berat}
-              className="input-green"
+              className="input-green border-b-1 border-gray-400"
               onIonInput={(e) => handleUserChange('berat', e.detail.value as string)}
             />
             <p className="text-[#0EB96F] text-md">kg</p>

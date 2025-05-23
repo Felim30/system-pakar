@@ -23,13 +23,13 @@ export const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className="bg-transparent text-white w-3/5 border-b-2 border-white py-2 flex items-center justify-between">
+    <div className="bg-transparent text-white w-3/5 border-b-2 border-white flex items-center justify-between">
       <IonInput
         type={isPassword && !isVisible ? "password" : "text"}
         value={value}
         placeholder={placeholder}
         onIonInput={(e) => onChange(e.detail.value ?? '')}
-        className="input-white"
+        className="input-white border-b-1 border-gray-400"
       />
       {isPassword && (
         <button
