@@ -40,7 +40,7 @@ const ListPenyakit: React.FC = () => {
         <div className='h-screen overflow-scroll w-screen flex flex-col bg-white justify-start items-center gap-6 mt-24'>
           {penyakitList.length == 0 ?  (
               <>
-                <IonLabel>Loading</IonLabel>
+                <IonLabel style={{ color: '#000000' }}>Loading</IonLabel>
                 <IonSpinner name="dots" style={{ color: '#000000' }} />
               </>
              ) : 
