@@ -22,4 +22,10 @@ ion-tab-bar {
   --color: #0EB96F;
 }
 
+.input-white{
+  --highlight-color-focused: white;
+  --border-color: white;
+  --color: white;
+}
+
 

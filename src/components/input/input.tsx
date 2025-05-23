@@ -29,7 +29,7 @@ export const Input: React.FC<InputProps> = ({
         value={value}
         placeholder={placeholder}
         onIonInput={(e) => onChange(e.detail.value ?? '')}
-        className="outline-none text-white w-full"
+        className="input-white"
       />
       {isPassword && (
         <button
