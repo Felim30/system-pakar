@@ -6,6 +6,7 @@ import { TitleBar } from '@/components/bar/title-bar';
 import { useHistory } from 'react-router-dom';
 import useGejala from '@/view-model/gejala-view-model';
 import useRiwayat from '@/view-model/riwayat-view-model';
+import { IonLabel, IonSpinner } from '@ionic/react';
 
 interface Gejala {
   id: string,
