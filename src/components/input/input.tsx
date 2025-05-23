@@ -1,31 +1,46 @@
-import { useState } from "react"
-import { IonIcon } from '@ionic/react';
+import { useState } from "react";
+import { IonIcon, IonInput } from '@ionic/react';
 import { eyeOff, eyeSharp } from 'ionicons/icons';
 
-type InputProps =  {
-    type? : string,
-    isPassword?: boolean,
-} & React.InputHTMLAttributes<HTMLInputElement>
+type InputProps = {
+  type?: string;
+  isPassword?: boolean;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+};
 
-export const Input : React.FC<InputProps> = ({type , isPassword = false, ...props}) => {
-    
-    const [isVisible , setIsVisible] = useState<boolean>(false);
+export const Input: React.FC<InputProps> = ({
+  isPassword = false,
+  value,
+  onChange,
+  placeholder
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
 
-    const Toggle = () => {
-        setIsVisible((prev) => !prev)
-    }
+  const toggleVisibility = () => {
+    setIsVisible(prev => !prev);
+  };
 
-    return (
-        <div className="bg-transparent !text-white w-3/5 outline-none border-b-2 border-solid border-b-white border-transparent py-4 flex items-center justify-between">
-            <input 
-                type={!isVisible && isPassword ? "password" : type} 
-                {...props}
-                className="outline-none"
-            />
-           {isPassword && <button onClick={Toggle}>
-                <IonIcon icon={isVisible ? eyeOff : eyeSharp} className="text-2xl text-white focus:outline-none" />
-            </button>}
-        </div>
-    )
-}
-
+  return (
+    <div className="bg-transparent text-white w-3/5 border-b-2 border-white py-2 flex items-center justify-between">
+      <IonInput
+        type={isPassword && !isVisible ? "password" : "text"}
+        value={value}
+        placeholder={placeholder}
+        onIonInput={(e) => onChange(e.detail.value ?? '')}
+        className="outline-none text-white w-full"
+      />
+      {isPassword && (
+        <button
+          type="button"
+          onClick={toggleVisibility}
+          className="ml-2"
+          aria-label={isVisible ? "Hide password" : "Show password"}
+        >
+          <IonIcon icon={isVisible ? eyeOff : eyeSharp} className="text-2xl text-white" />
+        </button>
+      )}
+    </div>
+  );
+};

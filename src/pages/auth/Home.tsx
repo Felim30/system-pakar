@@ -55,18 +55,18 @@ const Home: React.FC = () => {
 
   return (
       <GeneralContainer>
-        <div className='h-screen w-screen mb-8 flex flex-col bg-[#0EB96F] justify-center items-center gap-4'>
+        <div className='h-screen w-screen flex flex-col bg-[#0EB96F] justify-center items-center gap-4'>
          <Logo /> 
          <p className='text-white font-medium text-4xl'>Login</p>
          <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+            onChange={setUsername}
             placeholder='Username'
             value={username}
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            onChange={setPassword}
             placeholder='Password'
             value={password}
             isPassword={true}

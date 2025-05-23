@@ -69,20 +69,20 @@ const Register: React.FC = () => {
          <p className='text-white font-medium text-4xl'>Daftar</p>
          <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+            onChange={setUsername}
             value={username}
             placeholder='Username'
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            onChange={setPassword}
             placeholder='Password'
             value={password}
             isPassword={true}
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+            onChange={setConfirmPassword}
             placeholder='Confirm Password'
             value={confirmPassword}
             isPassword={true}

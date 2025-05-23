@@ -70,20 +70,20 @@ const ForgetPassword: React.FC = () => {
          <p className='text-white font-medium text-2xl'>Lupa password</p>
          <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+            onChange={setUsername}
             placeholder='Username'
             value={username}
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            onChange={setPassword}
             placeholder='Password'
             isPassword={true}
             value={password}
           />
           <Input 
             type='text' 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+            onChange={setConfirmPassword}
             placeholder='Confirm Password'
             isPassword={true}
             value={confirmPassword}

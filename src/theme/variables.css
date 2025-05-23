@@ -16,5 +16,10 @@ ion-tab-bar {
    --overflow: hidden;
  }
 
+.input-green {
+  --highlight-color-focused: #0EB96F;
+  --border-color: #0EB96F;
+  --color: #0EB96F;
+}
 
 
