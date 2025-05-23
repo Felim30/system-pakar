@@ -26,7 +26,7 @@ const Register: React.FC = () => {
         message: text,
         duration: 1500,
         color: color,
-        position: "bottom",
+        position: "top",
       });
   };
 
