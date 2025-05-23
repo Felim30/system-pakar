@@ -73,7 +73,7 @@ const Pencegahan: React.FC = () => {
                 </>                
               )
           }
-                    </div>
+        </div>
       </GeneralContainer>
   );
 };
