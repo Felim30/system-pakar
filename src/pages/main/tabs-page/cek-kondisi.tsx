@@ -88,7 +88,10 @@ const CekKondisi: React.FC = () => {
       <TitleBar title="Cek Kondisi" />
       <div className="h-screen overflow-scroll w-screen flex flex-col bg-white justify-center items-center gap-6">
         {isLoading ? (
-          
+           <>
+            <IonLabel style={{ color: '#0EB96F' }}>Loading</IonLabel>
+            <IonSpinner name="dots" style={{ color: '#0EB96F' }} />
+          </>
         ) :
           (<>
             <p className="font-semibold text-black">Silahkan jawab pertanyaan berikut</p>
