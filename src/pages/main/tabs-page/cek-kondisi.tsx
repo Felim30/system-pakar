@@ -19,7 +19,7 @@ const CekKondisi: React.FC = () => {
   const [gejala , setGejala] = useState<Gejala[]>([])
   const [selected, setSelected] = useState<Record<string, boolean>>({});
   const [disabled , setDisabled] = useState<boolean>(false);
-  const [isLoading , setIsLoading] = useState<boolean>(false):
+  const [isLoading , setIsLoading] = useState<boolean>(false);
   const history = useHistory();
 
   const { callbackedGetGejala } = useGejala()
