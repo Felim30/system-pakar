@@ -18,17 +18,20 @@ const CekKondisi: React.FC = () => {
   const [selectedGeJala, setSelectedGejala] = useState<string[]>([]);
   const [gejala , setGejala] = useState<Gejala[]>([])
   const [selected, setSelected] = useState<Record<string, boolean>>({});
-  const [disabled , setDisabled] = useState<boolean>(false)
+  const [disabled , setDisabled] = useState<boolean>(false);
+  const [isLoading , setIsLoading] = useState<boolean>(false):
   const history = useHistory();
 
   const { callbackedGetGejala } = useGejala()
   const { konsultasi } = useRiwayat()
 
   useEffect(() => {
+    setIsLoading(true);
     const getGejala = async () => {
       const response = await callbackedGetGejala();
       console.log(response);
       setGejala(response);
+      setIsLoading(false);
     };
 
     getGejala();
@@ -84,42 +87,47 @@ const CekKondisi: React.FC = () => {
     <GeneralContainer>
       <TitleBar title="Cek Kondisi" />
       <div className="h-screen overflow-scroll w-screen flex flex-col bg-white justify-center items-center gap-6">
-        <p className="font-semibold text-black">Silahkan jawab pertanyaan berikut</p>
-        {gejala[index] &&<div className="bg-[#0EB96F] p-4 flex flex-col gap-4 rounded-lg border-2 border-white drop-shadow-lg w-4/5">
-          <p className="text-xl text-white">
-            Apakah anda mengalami {gejala[index].namaGejala}?
-          </p>
-          <RadioInput
-            label="Yes"
-            variant="foreground"
-            name="data"
-            checked={selected[gejala[index].id] === true}
-            onChange={() => handleGejalaChange(gejala[index], true)}
-          />
-          <RadioInput
-            label="No"
-            name="data"
-            variant="foreground"
-            checked={selected[gejala[index].id] === false}
-            onChange={() => handleGejalaChange(gejala[index], false)}
-          />
-        </div>}
-        <div className="flex gap-5 w-4/5 justify-between">
-          <Button 
-            text="Kembali" 
-            variant="foreground" 
-            onClick={handleDecrement}
-          />
+        {isLoading ? (
           
-          {index !== gejala.length - 1 ? <Button text="Lanjut" variant="primary" onClick={handleIncrement} /> 
-          : <Button 
-              text={disabled ? "Submitting..." : "Submit"} 
-              variant='primary' 
-              onClick={checkAndRedirect} 
-              disable={disabled}
-            />
-          }
-        </div>
+        ) :
+          (<>
+            <p className="font-semibold text-black">Silahkan jawab pertanyaan berikut</p>
+            {gejala[index] &&<div className="bg-[#0EB96F] p-4 flex flex-col gap-4 rounded-lg border-2 border-white drop-shadow-lg w-4/5">
+              <p className="text-xl text-white">
+                Apakah anda mengalami {gejala[index].namaGejala}?
+              </p>
+              <RadioInput
+                label="Yes"
+                variant="foreground"
+                name="data"
+                checked={selected[gejala[index].id] === true}
+                onChange={() => handleGejalaChange(gejala[index], true)}
+              />
+              <RadioInput
+                label="No"
+                name="data"
+                variant="foreground"
+                checked={selected[gejala[index].id] === false}
+                onChange={() => handleGejalaChange(gejala[index], false)}
+              />
+            </div>}
+            <div className="flex gap-5 w-4/5 justify-between">
+              <Button 
+                text="Kembali" 
+                variant="foreground" 
+                onClick={handleDecrement}
+              />
+              
+              {index !== gejala.length - 1 ? <Button text="Lanjut" variant="primary" onClick={handleIncrement} /> 
+              : <Button 
+                  text={disabled ? "Submitting..." : "Submit"} 
+                  variant='primary' 
+                  onClick={checkAndRedirect} 
+                  disable={disabled}
+                />
+              }
+            </div>
+          </>)}
       </div>
     </GeneralContainer>
   );
