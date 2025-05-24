@@ -211,7 +211,7 @@ const Profile: React.FC = () => {
           </div>
 
           <div className="flex justify-between w-2/3 gap-4">
-            <Button text="Back" variant="foreground" onClick={handleBack} />
+            <Button text="Kembali" variant="foreground" onClick={handleBack} />
             <Button
               text={loading ? 'Editing...' : 'Edit'}
               variant="primary"
