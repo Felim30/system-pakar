@@ -146,7 +146,7 @@ const Profile: React.FC = () => {
               />
             </div>
             <PencilIcon
-              className="absolute w-[4rem] p-4 h-[4rem] bottom-2 left-[7.5rem] rounded-full bg-gray-500 text-white"
+              className="absolute w-[4rem] p-4 h-[4rem]  bottom-1 left-[6.0rem] rounded-full bg-gray-500 text-white"
               onClick={handleProfileClick}
             />
           </div>
