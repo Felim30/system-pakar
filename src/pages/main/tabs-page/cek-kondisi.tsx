@@ -73,14 +73,15 @@ const CekKondisi: React.FC = () => {
   };
 
   const checkAndRedirect = async () => {
-    setDisabled(true)
-    console.log(selectedGeJala)
+    setDisabled(true);
+    console.log(selectedGeJala);
     const response = await konsultasi(selectedGeJala);
     const penyakit = response.penyakit
     const diagnosa : string = penyakit == null ? "sehat" : penyakit.namaPenyakit;
     if(diagnosa){
       history.push(`/main/hasil/${diagnosa}`);
-      setDisabled(false)
+      setDisabled(false);
+      setSelectedGejala([]);
     }
   };
   

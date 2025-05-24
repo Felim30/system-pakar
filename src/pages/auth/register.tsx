@@ -12,7 +12,7 @@ const Register: React.FC = () => {
   const [username , setUsername] = useState<string>("")
   const [password , setPassword] = useState<string>("")
   const [confirmPassword , setConfirmPassword] = useState<string>("")
-
+  
   const [loading , setLoading] = useState<boolean>(false);
 
   const history = useHistory();

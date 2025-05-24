@@ -50,7 +50,11 @@ const ListPenyakit: React.FC = () => {
                     onClick={() => handlePencegahan(penyakit.id)}
                   >
                     <p className={`font-bold text-black text-2xl`}>{penyakit.namaPenyakit}</p>
-                    <img src={`${MAIN_URL}${penyakit.penyakitProfile}`} width={40} height={40} />
+                    <img 
+                      src={`${MAIN_URL}${penyakit.penyakitProfile}`} 
+                      width={40} 
+                      height={40} 
+                    />
                   </div>
                 )
               })}
