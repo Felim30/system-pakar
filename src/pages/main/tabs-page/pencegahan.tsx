@@ -43,8 +43,8 @@ const Pencegahan: React.FC = () => {
   }, [id, getPenyakitById])
 
   return (
-      <GeneralContainer>
-        <TitleBar title={penyakit.namaPenyakit}/>
+      <GeneralContainer> =
+        <TitleBar title={penyakit.namaPenyakit} redirectTo='/main/listpenyakit'/>
         <div className='flex flex-col bg-white justify-center h-full items-center gap-y-6 mt-4'>
             {penyakit.penyakitProfile == "" ? 
             (

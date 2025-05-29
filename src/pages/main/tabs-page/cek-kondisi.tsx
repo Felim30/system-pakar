@@ -72,6 +72,13 @@ const CekKondisi: React.FC = () => {
     });
   };
 
+  const resetValue = () => {
+      setDisabled(false);
+      setSelectedGejala([]);
+      setSelected({});
+      setIndex(0);
+  }
+
   const checkAndRedirect = async () => {
     setDisabled(true);
     console.log(selectedGeJala);
@@ -80,8 +87,7 @@ const CekKondisi: React.FC = () => {
     const diagnosa : string = penyakit == null ? "sehat" : penyakit.namaPenyakit;
     if(diagnosa){
       history.push(`/main/hasil/${diagnosa}`);
-      setDisabled(false);
-      setSelectedGejala([]);
+      resetValue();
     }
   };
   

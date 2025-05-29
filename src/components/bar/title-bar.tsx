@@ -2,12 +2,12 @@ import { IonIcon } from "@ionic/react"
 import { arrowBack } from "ionicons/icons"
 import { useHistory } from "react-router"
 
-export const TitleBar : React.FC<{title : string}> = ({title}) => {
+export const TitleBar : React.FC<{title : string , redirectTo? : string}> = ({title, redirectTo="/main/dashboard" }) => {
 
     const history = useHistory();
 
     const handleDashboard = () => {
-        history.push('/main/dashboard')
+        history.push(redirectTo)
     }
     
     return (
