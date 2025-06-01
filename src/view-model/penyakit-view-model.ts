@@ -28,7 +28,7 @@ const usePenyakit = () => {
             return response.data.message
         }
 
-        return response.data.penyakit
+        return response.data
     },[])
 
     return {

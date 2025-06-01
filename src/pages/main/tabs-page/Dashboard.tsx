@@ -4,6 +4,7 @@ import  Pencegahan from '../../../../public/assets/pencegahan.png'
 import  CekKondisi from '../../../../public/assets/18174.png'
 import { useHistory } from 'react-router';
 
+
 const Dashboard: React.FC = () => {
 
   const history = useHistory();
@@ -15,6 +16,7 @@ const Dashboard: React.FC = () => {
   const handleCekKondisi = () => {
     history.push('/main/cek-kondisi')
   }
+
 
   return (
       <GeneralContainer>

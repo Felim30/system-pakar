@@ -18,6 +18,10 @@ interface Penyakit {
   pencegahan : Pencegahan[]
 }
 
+interface Gejala {
+  id: string
+  namaGejala : string
+}
 const Pencegahan: React.FC = () => {
 
   const  { id } = useParams<{id : string}>();
@@ -31,12 +35,13 @@ const Pencegahan: React.FC = () => {
     pencegahan: [],
     penyakitProfile: ""
   });
+  const [gejala , setGejala] = useState<Gejala[]>([]);
 
   useEffect(() => {
     const getPenyakitByIdCall = async () => {
       const response = await getPenyakitById(id);
-      setPenyakit(response)
-
+      setPenyakit(response.penyakit)
+      setGejala(response.gejala)
     }
 
     getPenyakitByIdCall();
@@ -59,6 +64,14 @@ const Pencegahan: React.FC = () => {
                   />
                   <div className='w-3/4 h-2/5 overflow-y-scroll font-light text-black'>
                     {penyakit.deskripsi}
+                    <p>Gejala penyakit ini yaitu : </p>
+                    <br/>
+                    <ul className="list-disc list-inside">
+                      {gejala.map((gej) => {
+                        return <li key={gej.id}>{gej.namaGejala}</li>
+                      })}
+                    </ul>
+                     <br/>
                     <p>Langkah pencegahan yang bisa diambil yaitu : </p>
                     <br/>
                     <ul className="list-disc list-inside">
