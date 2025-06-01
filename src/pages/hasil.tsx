@@ -21,7 +21,7 @@ const Hasil: React.FC = () => {
           Hasil Diagnosa menunjukkan bahwa
         </p>
         <img src={sehat ? Sehat : Penyakit} width={250} height={250} />
-        <p className="text-md text-center font-semibold text-black mt-10 mb-3">
+        <p className="text-md text-center font-semibold text-black mt-10 mb-3 px-2">
           {sehat ? "Sistem Kami belum bisa mendeteksi penyakit yang dialami anda disarankan untuk menghubungi layanan kesehatan" : `Anda  terjangkit Penyakit ${diagnosa}`}
         </p>
         <Button text="Berikutnya" variant="primary" onClick={goHome} size="4/5" />
