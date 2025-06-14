@@ -9,4 +9,4 @@ const setHeaders = async () => {
   };
 };
 
-export default setHeaders
+export default setHeaders;
