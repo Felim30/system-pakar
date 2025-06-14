@@ -1,7 +1,9 @@
 import apiClient from "@/lib/apiUrl"
 import { GET_USER, UPDATE_USER } from "@/lib/constant"
 import setHeaders from "@/lib/getHeaders"
+import logOut from "@/lib/logOut";
 import { useCallback } from "react";
+import { useHistory } from "react-router";
 
 interface User {
   username: string,
@@ -11,11 +13,19 @@ interface User {
 }
 
 const useUser = () => {
+  
+  const history = useHistory();
+
   const getUser = useCallback(async () => {
     try {
       const headers = await setHeaders();
 
       const response = await apiClient.get(GET_USER, { headers: headers });
+
+      if(response.status == 403) {
+        logOut();
+        history.push('/');
+      }
       
       if (response.status !== 200) {
         return response.data.message;
@@ -26,7 +36,7 @@ const useUser = () => {
       console.error("Error fetching user:", error);
       throw error;
     }
-  }, []);
+  }, [history]);
 
   const updateUser = async (user: User, profileFile: File | null) => {
     try {
@@ -48,8 +58,16 @@ const useUser = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
-  
-      return response.data;
+
+      if(response.status == 403){  
+          logOut();
+          history.push('/');
+      }else if (response.status == 201){
+          return response.data;
+      }else{
+        return response.data.message
+      }
+    
     } catch (error) {
       console.error("Error updating user:", error);
       throw error;
